@@ -5,7 +5,7 @@ from kivy.uix.textinput import TextInput
 
 class MainApp(App):
     def build(self):
-        self.operators = ["/", "*", "+", "-"]
+        self.operators = ["/", "*", "+", "-", "**"]
         self.last_was_operator = None
         self.last_button = None
         main_layout = BoxLayout(orientation="vertical")
@@ -14,6 +14,7 @@ class MainApp(App):
         )
         main_layout.add_widget(self.solution)
         buttons = [
+            ["(", ")", "^", "B"],
             ["7", "8", "9", "/"],
             ["4", "5", "6", "*"],
             ["1", "2", "3", "-"],
@@ -45,6 +46,10 @@ class MainApp(App):
         if button_text == "C":
             # Clear the solution widget.
             self.solution.text = ""
+        elif button_text == "^":
+            self.solution.text = self.solution.text + "**"
+        elif button_text == "B":
+            self.solution.text = self.solution.text[:-1]
         else:
             if current and (self.last_was_operator and button_text in self.operators):
                 # Don't add two operators right after each other.
@@ -61,8 +66,12 @@ class MainApp(App):
     def on_solution(self, instance):
         text = self.solution.text
         if text:
-            solution = str(eval(self.solution.text))
-            self.solution.text = solution
+            try:
+                solution = str(eval(self.solution.text))
+                self.solution.text = solution
+            except:
+                self.solution.text = self.solution.text
+            
 
 if __name__ == '__main__':
     app = MainApp()
