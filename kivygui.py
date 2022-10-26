@@ -2,6 +2,8 @@ from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
+import mathtools
+import math
 
 class MainApp(App):
     def build(self):
@@ -15,6 +17,7 @@ class MainApp(App):
         main_layout.add_widget(self.solution)
         buttons = [
             ["(", ")", "^", "B"],
+            ["√", "", "", ""],
             ["7", "8", "9", "/"],
             ["4", "5", "6", "*"],
             ["1", "2", "3", "-"],
@@ -52,6 +55,9 @@ class MainApp(App):
         elif button_text == "B":
             # set the backspace behavior. 
             self.solution.text = self.solution.text[:-1]
+        elif button_text == "√":
+            # set the squareroot to have an open paren.
+            self.solution.text = self.solution.text + "√("
         else:
             if current and (self.last_was_operator and button_text in self.operators):
                 # Don't add two operators right after each other.
@@ -64,15 +70,16 @@ class MainApp(App):
                 self.solution.text = new_text
         self.last_button = button_text
         self.last_operator = self.last_button in self.operators
-    
+        
     def on_solution(self, instance):
-        text = self.solution.text
-        if text:
+        text = mathtools.evaluation_prep(self.solution.text)
+        #print(text)        
+        if text:            
             try:
-                solution = str(eval(self.solution.text))
-                self.solution.text = solution
+                solution = str(eval(text))
+                self.solution.text = solution                
             except:
-                self.solution.text = self.solution.text
+                self.solution.text = text
             
 
 if __name__ == '__main__':
