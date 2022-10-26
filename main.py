@@ -1,5 +1,5 @@
 import pytest
-from utils import math_functions
+from utils import mathtools, kivygui
 
 def run_tests():
     pytest.main()
