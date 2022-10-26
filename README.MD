@@ -8,16 +8,13 @@ Added features:
 - Parenthesis
 - Exponents
 - backspace button
-
-Current In progress:
 - Square root
 
-TODOs:
-My early plans on this are still present in this. Need to separate out older artifacts into an old branch so I can reference if needed. As a note I currently
-prefer the approach taken by the calculator as it handles things more organically and via natural python options. 
+Current In progress:
+work up a testing suite for current features. 
 
 Roadmap
-1. Clean up codebase separate legacy code into new branch. 
+1. Clean up codebase separate legacy code into new branch. - COMPLETE
 2. Continue adding base scientific calculator features.
 3. Trig functions (sin, cos, tan, etc.)
 4. logrhythms
