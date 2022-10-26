@@ -47,8 +47,10 @@ class MainApp(App):
             # Clear the solution widget.
             self.solution.text = ""
         elif button_text == "^":
+            # Set the language for eval to be more computer savvy. 
             self.solution.text = self.solution.text + "**"
         elif button_text == "B":
+            # set the backspace behavior. 
             self.solution.text = self.solution.text[:-1]
         else:
             if current and (self.last_was_operator and button_text in self.operators):
