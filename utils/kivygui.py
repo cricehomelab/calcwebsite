@@ -72,14 +72,8 @@ class MainApp(App):
         self.last_operator = self.last_button in self.operators
         
     def on_solution(self, instance):
-        text = mathtools.evaluation_prep(self.solution.text)
-        #print(text)        
-        if text:            
-            try:
-                solution = str(eval(text))
-                self.solution.text = solution                
-            except:
-                self.solution.text = text
+        solution = mathtools.solution(self.solution.text)
+        self.solution.text = solution
             
 
 if __name__ == '__main__':

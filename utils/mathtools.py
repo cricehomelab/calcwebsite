@@ -23,11 +23,15 @@ def evaluation_prep(text):
         #print(text)
     
     return text
+def solution(solve):
+    text = evaluation_prep(solve)
+    #print(text)        
+    if text:            
+        try:
+            solution = str(eval(text))
+            return solution                
+        except:
+            return "error"
 
-'''
-text = evaluation_prep('√(9)+√(9)')
-print(text)
-print(str(eval(text)))
-'''
 
 
