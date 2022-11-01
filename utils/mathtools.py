@@ -2,30 +2,48 @@ from cgitb import text
 import math
 from turtle import textinput
 
-def evaluation_prep(text):
-    #print("hello")
+
+def squareroot_account(text):    
     text = text.split("√")
-    #print(text)
-    if len(text) == 2:
-        #print('hello')        
+    
+    if len(text) == 2:               
         text.insert(1, "math.sqrt")
-        text = ''.join(text)
-        #print(text)
-    else:    
-        #print(f'len of list {len(text)}') 
-        num_of_splits = len(text) -1
-        #print(f"num of splits {num_of_splits}")
-        while num_of_splits > 0:
-            #print(num_of_splits)
+        text = ''.join(text)        
+    else:
+        num_of_splits = len(text) -1 
+        while num_of_splits > 0:            
             text.insert(num_of_splits, "math.sqrt")
             num_of_splits -= 1            
         text = ''.join(text)
-        #print(text)
-    
     return text
+
+def pi_account(text):
+    if text == "π":
+        return math.pi
+    
+    text = text.split("π")
+    if len(text) == 2:               
+        text.insert(1, "math.pi")
+        text = ''.join(text)  
+    else:
+        num_of_splits = len(text) -1 
+        while num_of_splits > 0:            
+            text.insert(num_of_splits, "math.pi")
+            num_of_splits -= 1            
+        text = ''.join(text)
+
+    return text
+
+def evaluation_prep(text):
+    text = squareroot_account(text)  
+    text = pi_account(text) 
+
+
+
+    return text
+
 def solution(solve):
-    text = evaluation_prep(solve)
-    #print(text)        
+    text = evaluation_prep(solve)           
     if text:            
         try:
             solution = str(eval(text))

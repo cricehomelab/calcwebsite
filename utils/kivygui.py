@@ -7,7 +7,7 @@ import math
 
 class MainApp(App):
     def build(self):
-        self.operators = ["/", "*", "+", "-", "**"]
+        self.operators = ["/", "*", "+", "-", "^", "**"]
         self.last_was_operator = None
         self.last_button = None
         main_layout = BoxLayout(orientation="vertical")
@@ -17,7 +17,7 @@ class MainApp(App):
         main_layout.add_widget(self.solution)
         buttons = [
             ["(", ")", "^", "B"],
-            ["√", "", "", ""],
+            ["√", "π", "", ""],
             ["7", "8", "9", "/"],
             ["4", "5", "6", "*"],
             ["1", "2", "3", "-"],
@@ -48,20 +48,22 @@ class MainApp(App):
 
         if button_text == "C":
             # Clear the solution widget.
-            self.solution.text = ""
-        elif button_text == "^":
-            # Set the language for eval to be more computer savvy. 
-            self.solution.text = self.solution.text + "**"
+            self.solution.text = ""        
         elif button_text == "B":
             # set the backspace behavior. 
             self.solution.text = self.solution.text[:-1]
         elif button_text == "√":
             # set the squareroot to have an open paren.
-            self.solution.text = self.solution.text + "√("
+            self.solution.text = self.solution.text + "√(" 
+        elif button_text == "π":            
+            self.solution.text = self.solution.text + "π"
+        elif button_text == "^":
+            # Set the language for eval to be more computer savvy. 
+            self.solution.text = self.solution.text + "**"
         else:
             if current and (self.last_was_operator and button_text in self.operators):
                 # Don't add two operators right after each other.
-                return
+                return            
             elif current == "" and button_text in self.operators:
                 # First character cannot be an operator.
                 return
